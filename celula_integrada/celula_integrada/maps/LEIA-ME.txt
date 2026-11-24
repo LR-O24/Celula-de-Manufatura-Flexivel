@@ -1,0 +1,2 @@
+Coloque aqui arena.pgm e arena.yaml gerados com o mapeamento:
+  rosrun map_server map_saver -f $(rospack find celula_integrada)/maps/arena

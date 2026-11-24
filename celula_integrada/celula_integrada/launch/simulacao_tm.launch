@@ -1,0 +1,7 @@
+<launch>
+  <!-- Teste do Maestro com o TM só em simulação (sem gripper real) -->
+  <include file="$(find celula_integrada)/launch/tm.launch">
+    <arg name="sim" value="true"/>
+    <arg name="simular_gripper" value="true"/>
+  </include>
+</launch>

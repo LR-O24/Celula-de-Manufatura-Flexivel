@@ -1,0 +1,13 @@
+<launch>
+  <!-- Rodar APÓS pioneer.launch. Salvar: rosrun map_server map_saver -f $(rospack find celula_integrada)/maps/arena -->
+  <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
+    <remap from="scan" to="/scan"/>
+    <param name="base_frame" value="base_link"/>
+    <param name="odom_frame" value="odom"/>
+    <param name="map_update_interval" value="2.0"/>
+    <param name="maxUrange" value="6.0"/>
+    <param name="delta" value="0.05"/>
+  </node>
+  <node pkg="rviz" type="rviz" name="rviz"/>
+  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen"/>
+</launch>

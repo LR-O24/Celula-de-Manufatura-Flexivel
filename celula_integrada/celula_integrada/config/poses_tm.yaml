@@ -1,0 +1,19 @@
+# Poses articulares do TM (radianos), ordem joint_1..joint_6.
+# ATENÇÃO: valores PLACEHOLDER. Re-ensine cada pose no robô/MoveIt e atualize aqui.
+# Valide primeiro em simulação (sim:=true).
+grupo_moveit: "tmr_arm"
+vel_scaling: 0.2
+acc_scaling: 0.2
+poses:
+  home:           [0.0, -0.3, 1.2, -0.9, 1.57, 0.0]
+  pre_pick:       [0.5, -0.2, 1.0, -0.8, 1.57, 0.0]
+  pick:           [0.5,  0.1, 1.0, -1.1, 1.57, 0.0]
+  place_esquerda: [1.2, -0.2, 1.0, -0.8, 1.57, 0.0]
+  place_direita:  [-1.2, -0.2, 1.0, -0.8, 1.57, 0.0]
+gripper:
+  # Serviço SetIO do tm_driver (tm_msgs/SetIO): module 0=end-effector, type 1=digital out
+  servico: "tm_driver/set_io"
+  pin: 0
+  fechar_estado: 1.0
+  abrir_estado: 0.0
+  tempo_acionamento: 0.8

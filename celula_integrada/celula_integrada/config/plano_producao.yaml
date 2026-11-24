@@ -1,0 +1,18 @@
+# Coordenadas no frame "map": [x (m), y (m), theta (rad)]
+# SUBSTITUA pelos valores medidos com: rostopic echo -n1 /amcl_pose
+locais:
+  C1: [1.00, 0.50, 0.00]
+  C2: [2.50, 0.50, 0.00]
+  C3: [4.00, 0.50, 0.00]
+  C4: [2.50, 3.00, 1.5708]   # Ponto de encontro com o TM
+
+catalogo_pecas:
+  'P1': { max_vel: 0.5, destino_tm: 'esquerda', prioridade: 1 }
+  'P2': { max_vel: 0.3, destino_tm: 'direita',  prioridade: 2 }
+  'P3': { max_vel: 0.4, destino_tm: 'esquerda', prioridade: 3 }
+
+plano:
+  - { peca: 'P3', origem: 'C2' }
+  - { peca: 'P1', origem: 'C1' }
+  - { peca: 'P2', origem: 'C1' }
+  - { peca: 'P1', origem: 'C3' }

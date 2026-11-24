@@ -1,0 +1,17 @@
+<launch>
+  <!-- NOTEBOOK B (estação TM). Antes: projeto TMflow com nó "Listen" em execução. -->
+  <arg name="robot_ip" default="192.168.10.2"/>
+  <arg name="sim"      default="false"/>
+  <arg name="simular_gripper" default="false"/>
+
+  <!-- Driver + MoveIt! do pacote oficial (ajuste o modelo: tm5_700, tm5_900, tm12, tm14...) -->
+  <include file="$(find tm5_700_moveit_config)/launch/tm5_700_moveit_planning_execution.launch">
+    <arg name="sim" value="$(arg sim)"/>
+    <arg name="robot_ip" value="$(arg robot_ip)"/>
+  </include>
+
+  <node pkg="celula_integrada" type="tm_node.py" name="tm_node" output="screen">
+    <param name="poses" value="$(find celula_integrada)/config/poses_tm.yaml"/>
+    <param name="simular_gripper" value="$(arg simular_gripper)"/>
+  </node>
+</launch>

@@ -1,0 +1,16 @@
+<launch>
+  <arg name="plano" default="$(find celula_integrada)/config/plano_producao.yaml"/>
+  <arg name="log"   default="$(env HOME)/execucao_celula.csv"/>
+
+  <node pkg="celula_integrada" type="maestro.py" name="maestro" output="screen">
+    <param name="plano" value="$(arg plano)"/>
+    <param name="log" value="$(arg log)"/>
+    <param name="vel_padrao" value="0.5"/>
+    <param name="tempo_carga" value="3.0"/>
+    <param name="tol_pos" value="0.05"/>
+    <param name="tol_ang_deg" value="3.0"/>
+    <param name="esperar_tm_antes_c4" value="true"/>
+    <param name="cmd_vel_topic" value="/cmd_vel"/>
+    <param name="odom_topic" value="/odom"/>
+  </node>
+</launch>

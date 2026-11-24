@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>celula_integrada</name>
+  <version>1.0.0</version>
+  <description>Célula de manufatura flexível: Pioneer 3DX + Omron TM (ROS 1 Noetic)</description>
+  <maintainer email="grupo@exemplo.com">Grupo</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>actionlib_msgs</build_depend>
+  <build_export_depend>message_runtime</build_export_depend>
+  <exec_depend>message_runtime</exec_depend>
+
+  <depend>rospy</depend>
+  <depend>actionlib</depend>
+  <depend>move_base_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>tf</depend>
+  <depend>dynamic_reconfigure</depend>
+  <depend>moveit_commander</depend>
+
+  <exec_depend>move_base</exec_depend>
+  <exec_depend>amcl</exec_depend>
+  <exec_depend>map_server</exec_depend>
+  <exec_depend>gmapping</exec_depend>
+  <exec_depend>dwa_local_planner</exec_depend>
+  <exec_depend>python3-yaml</exec_depend>
+  <!-- Instalados manualmente no workspace: rosaria, tm_driver, tm_msgs, tm5_700_moveit_config -->
+</package>

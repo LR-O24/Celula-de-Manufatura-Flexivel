@@ -1,0 +1,41 @@
+<launch>
+  <!-- map_server + amcl + move_base (rodar no PC embarcado ou no notebook A) -->
+  <arg name="mapa" default="$(find celula_integrada)/maps/arena.yaml"/>
+  <arg name="x0"   default="0.0"/>
+  <arg name="y0"   default="0.0"/>
+  <arg name="a0"   default="0.0"/>
+
+  <node pkg="map_server" type="map_server" name="map_server" args="$(arg mapa)"/>
+
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+    <remap from="scan" to="/scan"/>
+    <param name="odom_model_type" value="diff-corrected"/>
+    <param name="odom_frame_id" value="odom"/>
+    <param name="base_frame_id" value="base_link"/>
+    <param name="global_frame_id" value="map"/>
+    <param name="min_particles" value="500"/>
+    <param name="max_particles" value="3000"/>
+    <param name="update_min_d" value="0.02"/>
+    <param name="update_min_a" value="0.02"/>
+    <param name="resample_interval" value="1"/>
+    <param name="transform_tolerance" value="0.5"/>
+    <param name="laser_max_range" value="6.0"/>
+    <param name="initial_pose_x" value="$(arg x0)"/>
+    <param name="initial_pose_y" value="$(arg y0)"/>
+    <param name="initial_pose_a" value="$(arg a0)"/>
+    <param name="initial_cov_xx" value="0.1"/>
+    <param name="initial_cov_yy" value="0.1"/>
+    <param name="initial_cov_aa" value="0.1"/>
+  </node>
+
+  <node pkg="move_base" type="move_base" name="move_base" output="screen" respawn="false">
+    <rosparam file="$(find celula_integrada)/config/nav/move_base_params.yaml" command="load"/>
+    <rosparam file="$(find celula_integrada)/config/nav/costmap_common_params.yaml" command="load" ns="global_costmap"/>
+    <rosparam file="$(find celula_integrada)/config/nav/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(find celula_integrada)/config/nav/global_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find celula_integrada)/config/nav/local_costmap_params.yaml" command="load"/>
+    <rosparam file="$(find celula_integrada)/config/nav/dwa_local_planner_params.yaml" command="load"/>
+    <remap from="cmd_vel" to="/cmd_vel"/>
+    <remap from="odom" to="/odom"/>
+  </node>
+</launch>

@@ -1,0 +1,33 @@
+<launch>
+  <!-- PC EMBARCADO DO PIONEER: driver + laser + TFs estáticas -->
+  <arg name="porta"  default="/dev/ttyUSB0"/>
+  <!-- Posição do laser em relação ao base_link (MEDIR no robô real!) -->
+  <arg name="laser_x" default="0.15"/>
+  <arg name="laser_y" default="0.0"/>
+  <arg name="laser_z" default="0.20"/>
+
+  <node pkg="rosaria" type="RosAria" name="RosAria" output="screen">
+    <param name="port" value="$(arg porta)"/>
+    <remap from="/RosAria/cmd_vel" to="/cmd_vel"/>
+    <remap from="/RosAria/pose"    to="/odom"/>
+  </node>
+  <!-- Se o seu RosAria não publica a TF odom->base_link, descomente e use o nó
+       tf do seu setup. A versão padrão publica via ~publish_aria_lasers/tf. -->
+
+  <node pkg="tf" type="static_transform_publisher" name="base_to_laser"
+        args="$(arg laser_x) $(arg laser_y) $(arg laser_z) 0 0 0 base_link laser 50"/>
+
+  <!-- Driver do laser: ESCOLHA UM e ajuste porta/IP -->
+  <!--
+  <node pkg="rplidar_ros" type="rplidarNode" name="rplidar">
+    <param name="serial_port" value="/dev/ttyUSB1"/>
+    <param name="frame_id" value="laser"/>
+    <remap from="scan" to="/scan"/>
+  </node>
+  <node pkg="urg_node" type="urg_node" name="hokuyo">
+    <param name="serial_port" value="/dev/ttyACM0"/>
+    <param name="frame_id" value="laser"/>
+    <remap from="scan" to="/scan"/>
+  </node>
+  -->
+</launch>

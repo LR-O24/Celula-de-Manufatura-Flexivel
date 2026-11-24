@@ -1,0 +1,10 @@
+# Goal
+string peca
+string destino          # 'esquerda' ou 'direita'
+---
+# Result
+bool success
+string message
+---
+# Feedback
+string etapa            # IR_PRE_PICK, PICK, PICK_STARTED, IR_PLACE, PLACING, HOME
